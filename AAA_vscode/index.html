@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Sign Detection & Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-traffic-light"></i> Traffic Sign Detection & Classification</h1>
+            <p class="header__description">Upload an image to detect and classify traffic signs using YOLO and CNN models</p>
+        </header>
+
+        <main class="main">
+            <!-- Upload Section -->
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-area__content">
+                        <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <h3>Drop your image here</h3>
+                        <p>or click to browse files</p>
+                        <p class="upload-formats">Supported formats: JPG, PNG, JPEG</p>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*" class="upload-input">
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section class="processing-section hidden" id="processingSection">
+                <div class="card">
+                    <div class="card__body">
+                        <div class="processing-info">
+                            <div class="loading-spinner"></div>
+                            <div>
+                                <h3>Processing Image...</h3>
+                                <p class="processing-status" id="processingStatus">Initializing...</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <div class="results-grid">
+                    <!-- Original and Annotated Images -->
+                    <div class="card">
+                        <div class="card__header">
+                            <h3><i class="fas fa-image"></i> Detection Results</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="image-comparison">
+                                <div class="image-container">
+                                    <h4>Original Image</h4>
+                                    <img id="originalImage" class="result-image" alt="Original image">
+                                </div>
+                                <div class="image-container">
+                                    <h4>Detected Traffic Signs</h4>
+                                    <img id="annotatedImage" class="result-image" alt="Annotated image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="card">
+                        <div class="card__header">
+                            <h3><i class="fas fa-chart-bar"></i> Detection Statistics</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-value" id="detectionCount">0</span>
+                                    <span class="stat-label">Signs Detected</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value" id="processingTime">0ms</span>
+                                    <span class="stat-label">Processing Time</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Classification Results -->
+                    <div class="card full-width">
+                        <div class="card__header">
+                            <h3><i class="fas fa-tags"></i> Classification Results</h3>
+                        </div>
+                        <div class="card__body">
+                            <div class="classifications-grid" id="classificationsGrid">
+                                <!-- Dynamic content will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Upload Button -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="resetApplication()">
+                        <i class="fas fa-plus"></i> Process Another Image
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
